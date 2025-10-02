@@ -4,12 +4,12 @@ import { Subscription } from 'rxjs';
 import { ModalService } from '../../services/modal.service';
 
 @Component({
-  selector: 'app-hero',
+  selector: 'app-vam-info-modal',
   imports: [CommonModule],
-  templateUrl: './hero.component.html',
-  styleUrl: './hero.component.css'
+  templateUrl: './vam-info-modal.component.html',
+  styleUrl: './vam-info-modal.component.css'
 })
-export class HeroComponent {
+export class VamInfoModalComponent implements OnInit, OnDestroy {
   private modalService = inject(ModalService);
   private subscription: Subscription | null = null;
   
@@ -29,7 +29,13 @@ export class HeroComponent {
     }
   }
 
-  openVamModal(): void {
-    this.modalService.openVamModal();
+  closeModal(): void {
+    this.modalService.closeVamModal();
+  }
+
+  onBackdropClick(event: Event): void {
+    if (event.target === event.currentTarget) {
+      this.closeModal();
+    }
   }
 }

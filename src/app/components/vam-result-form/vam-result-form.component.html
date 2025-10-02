@@ -1,19 +1,187 @@
-<div id="vam-result-form">
-    <form class="bg-white p-6 rounded shadow-md">
-        <div class="mb-4">
-            <label for="name" class="block text-gray-700 font-semibold mb-2">Name:</label>
-            <input type="text" id="name" name="name" class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400">
+<div id="vam-result-form" class="max-w-2xl mx-auto p-6">
+    <!-- Título del formulario -->
+    <div class="text-center mb-8">
+        <h2 class="text-3xl font-bold text-gray-900 font-primary mb-2">
+            Calcula tus <span class="text-primary">Zonas de Entrenamiento</span>
+        </h2>
+        <p class="text-gray-600 font-secondary">
+            Introduce tus datos del Test VAM para obtener tus zonas personalizadas
+        </p>
+    </div>
+
+    <form class="bg-white p-8 rounded-xl shadow-lg border border-gray-100" (ngSubmit)="onSubmit($event)">
+        <!-- Campo VAM -->
+        <div class="mb-6">
+            <label class="block text-gray-700 font-semibold mb-3 font-primary">
+                Datos del Test VAM <span class="text-primary">*</span>
+            </label>
+            
+            <!-- Selector de método -->
+            <div class="mb-4">
+                <p class="text-sm text-gray-600 mb-3">
+                    Elige cómo quieres introducir tus datos del test VAM:
+                </p>
+                <div class="flex gap-2">
+                    <button 
+                        type="button" 
+                        (click)="toggleToPaceMode()"
+                        [class]="isPaceMode ? 'flex-1 px-4 py-2 text-sm font-medium rounded-lg border transition-colors bg-primary text-white border-primary' : 'flex-1 px-4 py-2 text-sm font-medium rounded-lg border transition-colors bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200'"
+                    >
+                        📏 Por Ritmo
+                    </button>
+                    <button 
+                        type="button" 
+                        (click)="toggleToDistanceMode()"
+                        [class]="!isPaceMode ? 'flex-1 px-4 py-2 text-sm font-medium rounded-lg border transition-colors bg-primary text-white border-primary' : 'flex-1 px-4 py-2 text-sm font-medium rounded-lg border transition-colors bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200'"
+                    >
+                        📍 Por Distancia
+                    </button>
+                </div>
+            </div>
+
+            <!-- Modo Ritmo -->
+            <div *ngIf="isPaceMode">
+                <p class="text-sm text-gray-600 mb-4">
+                    Introduce el ritmo (pace) por kilómetro que mantuviste durante tu test VAM
+                </p>
+                <div class="flex items-center space-x-3">
+                    <div class="flex-1">
+                        <label for="pace-minutes" class="block text-xs text-gray-500 mb-1">Minutos</label>
+                        <input 
+                            type="number" 
+                            id="pace-minutes" 
+                            name="pace-minutes" 
+                            min="2" 
+                            max="15" 
+                            placeholder="4"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
+                        >
+                    </div>
+                    <div class="flex-1">
+                        <label for="pace-seconds" class="block text-xs text-gray-500 mb-1">Segundos</label>
+                        <input 
+                            type="number" 
+                            id="pace-seconds" 
+                            name="pace-seconds" 
+                            min="0" 
+                            max="59" 
+                            step="1"
+                            placeholder="30"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
+                        >
+                    </div>
+                    <div class="flex items-end text-gray-500 font-medium mt-6">
+                        <span class="text-lg">min/km</span>
+                    </div>
+                </div>
+                <div class="mt-2 text-xs text-gray-500">
+                    Ejemplo: Si tu ritmo fue de 4 minutos y 30 segundos por kilómetro → 4:30 min/km
+                </div>
+            </div>
+
+            <!-- Modo Distancia -->
+            <div *ngIf="!isPaceMode">
+                <p class="text-sm text-gray-600 mb-4">
+                    Introduce la distancia recorrida en tu test VAM de 5 minutos
+                </p>
+                <div class="flex items-center space-x-3">
+                    <div class="flex-1">
+                        <label for="distance-meters" class="block text-xs text-gray-500 mb-1">Distancia</label>
+                        <input 
+                            type="number" 
+                            id="distance-meters" 
+                            name="distance-meters" 
+                            min="500" 
+                            max="3000" 
+                            step="10"
+                            placeholder="1200"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
+                        >
+                    </div>
+                    <div class="flex items-center text-gray-500 font-medium">
+                        <span class="text-lg">metros</span>
+                    </div>
+                </div>
+                <div class="mt-2 text-xs text-gray-500">
+                    Ejemplo: Si recorriste 1200 metros en 5 minutos → tu ritmo VAM se calculará automáticamente
+                </div>
+            </div>
         </div>
-        <div class="mb-4">
-            <label for="email" class="block text-gray-700 font-semibold mb-2">Email:</label>
-            <input type="email" id="email" name="email" class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400">
+
+        <!-- Campo FCmax -->
+        <div class="mb-8">
+            <label for="fcmax" class="block text-gray-700 font-semibold mb-3 font-primary">
+                Frecuencia Cardíaca Máxima <span class="text-primary">*</span>
+            </label>
+            <p class="text-sm text-gray-600 mb-4">
+                Tu FC máxima alcanzada durante el test VAM (en pulsaciones por minuto)
+            </p>
+            <div class="relative">
+                <input 
+                    type="number" 
+                    id="fcmax" 
+                    name="fcmax" 
+                    min="100" 
+                    max="220" 
+                    placeholder="190"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors pr-12"
+                >
+                <span class="absolute right-4 top-3 text-gray-500 text-sm">bpm</span>
+            </div>
+            <div class="mt-2 text-xs text-gray-500">
+                Rango típico: 160-200 bpm (varía según edad y condición física)
+            </div>
         </div>
-        <div class="mb-4">
-            <label for="message" class="block text-gray-700 font-semibold mb-2">Message:</label>
-            <textarea id="message" name="message" class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"></textarea>
+
+        <!-- Botones de acción -->
+        <div class="flex flex-col sm:flex-row gap-4">
+            <!-- Botón principal -->
+            <button 
+                type="submit" 
+                class="flex-1 bg-primary text-white font-bold py-4 px-6 rounded-lg hover:bg-secondary transition-all duration-300 transform hover:scale-[1.02] shadow-md hover:shadow-lg font-primary"
+            >
+                🎯 Calcular Zonas
+            </button>
+            
+            <!-- Botón secundario -->
+            <button 
+                type="button" 
+                class="flex-1 bg-gray-100 text-gray-700 font-semibold py-4 px-6 rounded-lg hover:bg-gray-200 transition-all duration-300 border border-gray-300 hover:border-gray-400 font-primary"
+                disabled
+            >
+                📄 Descargar Resultados
+            </button>
         </div>
-        <div>
-            <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-4 rounded hover:bg-blue-600 transition">Submit</button>
+
+        <!-- Estado actual (para debugging - puede eliminarse en producción) -->
+        <div class="mt-4 p-3 bg-primary/10 rounded-lg border border-primary">
+            <p class="text-xs text-primary">
+                <strong>Modo actual:</strong> {{ getSelectedMode() | uppercase }} 
+                <span class="ml-2">({{ isPaceMode ? 'Por Ritmo' : 'Por Distancia' }})</span>
+            </p>
+        </div>
+
+        <!-- Información adicional -->
+        <div class="mt-6 p-4 bg-gray-50 rounded-lg border-l-4 border-primary">
+            <div class="flex items-start">
+                <div class="flex-shrink-0">
+                    <svg class="w-5 h-5 text-primary mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-gray-700">
+                        <strong>¿No tienes estos datos?</strong> Realiza primero el 
+                        <button 
+                            type="button"
+                            (click)="openVamModal()"
+                            class="text-primary font-semibold hover:text-secondary underline transition-colors cursor-pointer"
+                        >
+                            Test VAM
+                        </button> para obtenerlos.
+                    </p>
+                </div>
+            </div>
         </div>
     </form>
 </div>

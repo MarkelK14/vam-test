@@ -6,13 +6,12 @@
 
 /* Global styles configuration (Tailwind v4) */
 @theme {
-  --font-primary: "Inter", sans-serif;
-  --font-secondary: "Poppins", sans-serif;
+  --font-primary: "Onest Variable", sans-serif;
+  --font-secondary: "Inter", sans-serif;
 
   --color-primary: #f05a1a;
   --color-secondary: #db5015;
   --color-background: #f3f4f6;
-  --color-background-dark: #18181b;
 }
 
 html {
