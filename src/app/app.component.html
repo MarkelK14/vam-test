@@ -3,6 +3,10 @@
 
 <app-vam-result-form (emittedVamData)="getVamData($event)"></app-vam-result-form>
 
+<app-pace-zones [vamData]="vamData"></app-pace-zones>
+
+<app-heart-rate-zones [vamData]="vamData"></app-heart-rate-zones>
+
 <app-vam-info-modal></app-vam-info-modal>
 
 

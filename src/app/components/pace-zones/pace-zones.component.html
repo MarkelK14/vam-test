@@ -1,0 +1,84 @@
+<!-- Tabla de Zonas de Entrenamiento -->
+@if (vamData.paceMin && vamData.paceSec && vamData.hrMax) {
+<div class="bg-white rounded-lg shadow-lg p-6 max-w-4xl mx-auto my-12">
+  
+  <!-- Título -->
+  <div class="text-center mb-6">
+    <h2 class="text-3xl font-bold text-gray-800 mb-2">🎯 Zonas de Entrenamiento</h2>
+    <p class="text-gray-600">Basadas en tu VAM: {{ vamData.paceMin }}:{{ (vamData.paceSec || 0).toString().padStart(2, '0') }} min/km</p>
+  </div>
+
+  <!-- Tabla -->
+  <div class="overflow-x-auto">
+    <table class="w-full border-collapse bg-white rounded-lg overflow-hidden shadow-sm">
+      
+      <!-- Header -->
+      <thead>
+        <tr class="bg-gray-50">
+          <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b w-16">
+            Zona
+          </th>
+          <th class="px-4 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider border-b max-w-xs">
+            Descripción
+          </th>
+          <th class="px-8 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider border-b w-32">
+            % VAM
+          </th>
+          <th class="px-8 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider border-b w-40">
+            Ritmo (min/km)
+          </th>
+        </tr>
+      </thead>
+      
+      <!-- Body -->
+      <tbody class="divide-y divide-gray-200">
+        
+        <!-- Iterar sobre todas las zonas -->
+        @for (zone of zonesByPace; track zone.zone) {
+        <tr class="hover:bg-gray-50 transition-colors">
+          <td class="px-4 py-4 whitespace-nowrap w-16">
+            <div class="flex items-center">
+              <div class="w-4 h-4 {{ getZoneColor(zone.zone.toString()) }} rounded-full mr-2"></div>
+              <span class="text-sm font-medium text-gray-900">{{ zone.zone }}</span>
+            </div>
+          </td>
+          <td class="px-4 py-4 text-sm text-gray-700 max-w-xs">
+            <div class="leading-relaxed">
+              <div class="font-medium mb-1">{{ zone.description }}</div>
+              <div class="text-xs text-gray-500 leading-tight">{{ zone.objective }}</div>
+            </div>
+          </td>
+          <td class="px-8 py-4 text-sm text-gray-900 font-mono whitespace-nowrap w-32 text-center">{{ getPercentageRange(zone) }}</td>
+          <td class="px-8 py-4 text-sm text-gray-900 font-mono whitespace-nowrap w-40 text-center">
+            {{ getPaceRange(zone) }}
+          </td>
+        </tr>
+        }
+        
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Nota informativa -->
+  <div class="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
+    <div class="flex items-start">
+      <div class="text-blue-600 mr-3">ℹ️</div>
+      <div class="text-sm text-blue-800">
+        <p class="font-medium mb-1">Nota importante:</p>
+        <p>Estas zonas son orientativas. Ajústalas según tus sensaciones y progreso. El % de FC máxima es aproximado y puede variar según tu condición física individual.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+}
+
+<!-- Mensaje cuando no hay datos -->
+@if (!vamData.paceMin || !vamData.paceSec || !vamData.hrMax) {
+<div class="text-center py-12">
+  <div class="text-gray-400 text-6xl mb-4">📊</div>
+  <h3 class="text-xl font-medium text-gray-600 mb-2">Completa el formulario</h3>
+  <p class="text-gray-500">Introduce tus datos VAM para generar las zonas de entrenamiento personalizadas</p>
+</div>
+}
+
