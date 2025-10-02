@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { Form, FormBuilder, FormControl, FormGroup, FormsModule, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ModalService } from '../../services/modal.service';
 import { IVamData } from '../../interfaces/ivam-data.Interface';
-import { toast, NgxSonnerToaster } from 'ngx-sonner';
+import { toast } from 'ngx-sonner';
 
 @Component({
   selector: 'app-vam-result-form',
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgxSonnerToaster],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './vam-result-form.component.html',
   styleUrl: './vam-result-form.component.css'
 })
@@ -30,17 +30,29 @@ export class VamResultFormComponent {
       paceMin: new FormControl(''),
       paceSec: new FormControl(''),
       distance: new FormControl(''),
-      hrMax: new FormControl('')
+      hrMax: new FormControl('', [Validators.required, Validators.min(60), Validators.max(220)]),
     });
   }
 
   getDataFromForm(){
+
+    if (this.isPaceMode){
+      const distance = this.getDistanceFromPace(this.vamForm.get('paceMin')?.value, this.vamForm.get('paceSec')?.value);
+      this.vamForm.get('distance')?.setValue(distance);
+    } else {
+      const { paceMin, paceSec } = this.getPaceFromDistance(this.vamForm.get('distance')?.value);
+      this.vamForm.get('paceMin')?.setValue(paceMin);
+      this.vamForm.get('paceSec')?.setValue(paceSec);
+    }
+
     if (this.vamForm.valid){
       this.emittedVamData.emit({
         paceMin: this.vamForm.get('paceMin')?.value,
         paceSec: this.vamForm.get('paceSec')?.value,
         hrMax: this.vamForm.get('hrMax')?.value,
       });
+    } else {
+      toast.error('Por favor, completa todos los campos correctamente.');
     }
   }
 
@@ -66,5 +78,28 @@ export class VamResultFormComponent {
 
   openVamModal(): void {
     this.modalService.openVamModal();
+  }
+
+  getPaceFromDistance(distance: number): { paceMin: number; paceSec: number } {
+    const totalMinutes = 5;
+
+    const pace = distance / totalMinutes; // metros por minuto
+    const pacePerKm = 1000 / pace; // minutos por km
+
+    const paceMin = Math.floor(pacePerKm);
+    const paceSec = Math.round((pacePerKm - paceMin) * 60);
+
+    return { paceMin, paceSec };
+  }
+
+  getDistanceFromPace(paceMin: number, paceSec: number): number {
+    const totalMinutes = 5;
+
+    const pacePerKm = paceMin + paceSec / 60; // minutos por km
+    const pace = 1000 / pacePerKm; // metros por minuto
+
+    const distance = pace * totalMinutes; // distancia en metros en 5 minutos
+
+    return Math.round(distance);
   }
 }
