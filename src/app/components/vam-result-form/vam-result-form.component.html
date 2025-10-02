@@ -1,5 +1,5 @@
 <div id="vam-result-form" class="max-w-2xl mx-auto p-6">
-    <!-- Título del formulario -->
+    <!-- Form title -->
     <div class="text-center mb-8">
         <h2 class="text-3xl font-bold text-gray-900 font-primary mb-2">
             Calcula tus <span class="text-primary">Zonas de Entrenamiento</span>
@@ -10,13 +10,13 @@
     </div>
 
     <form [formGroup]="vamForm"  class="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
-        <!-- Campo VAM -->
+        <!-- VAM field -->
         <div class="mb-6">
             <label class="block text-gray-700 font-semibold mb-3 font-primary">
                 Datos del Test VAM <span class="text-primary">*</span>
             </label>
             
-            <!-- Selector de método -->
+            <!-- Input method selector -->
             <div class="mb-4">
                 <p class="text-sm text-gray-600 mb-3">
                     Elige cómo quieres introducir tus datos del test VAM:
@@ -39,7 +39,7 @@
                 </div>
             </div>
 
-            <!-- Pace Mode -->
+            <!-- Pace mode -->
             @if (isPaceMode){
                 <div>
                     <p class="text-sm text-gray-600 mb-4">
@@ -83,7 +83,7 @@
                 </div>
             }
 
-            <!-- Distance Mode -->
+            <!-- Distance mode -->
              @if (!isPaceMode){
                 <div>
                     <p class="text-sm text-gray-600 mb-4">
@@ -115,7 +115,7 @@
             }
         </div>
 
-        <!-- HRmax Field -->
+        <!-- HR max field -->
         <div class="mb-8">
             <label for="hrMax" class="block text-gray-700 font-semibold mb-3 font-primary">
                 Frecuencia Cardíaca Máxima <span class="text-primary">*</span>
@@ -143,9 +143,9 @@
             </div>
         </div>
 
-        <!-- Botones de acción -->
+        <!-- Action buttons -->
         <div class="flex flex-col sm:flex-row gap-4">
-            <!-- Botón principal -->
+            <!-- Primary button -->
             <button 
                 type="submit" 
                 class="flex-1 bg-primary text-white font-bold py-4 px-6 rounded-lg hover:bg-secondary transition-all duration-300 transform hover:scale-[1.02] shadow-md hover:shadow-lg font-primary"
@@ -154,17 +154,17 @@
                 🎯 Calcular Zonas
             </button>
             
-            <!-- Botón secundario -->
-            <button 
+            <!-- Secondary button -->
+            <!-- <button 
                 type="button" 
                 class="flex-1 bg-gray-100 text-gray-700 font-semibold py-4 px-6 rounded-lg hover:bg-gray-200 transition-all duration-300 border border-gray-300 hover:border-gray-400 font-primary"
                 disabled
             >
                 📄 Descargar Resultados
-            </button>
+            </button> -->
         </div>
 
-        <!-- Información adicional -->
+        <!-- Additional information -->
         <div class="mt-6 p-4 bg-gray-50 rounded-lg border-l-4 border-primary">
             <div class="flex items-start">
                 <div class="flex-shrink-0">

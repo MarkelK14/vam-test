@@ -7,20 +7,20 @@ import { BehaviorSubject } from 'rxjs';
 export class ModalService {
   private vamModalOpen = new BehaviorSubject<boolean>(false);
   
-  // Observable para que los componentes se suscriban
+  // Observable for components to subscribe to
   vamModalOpen$ = this.vamModalOpen.asObservable();
 
-  // Abrir el modal VAM
+  // Open VAM modal
   openVamModal(): void {
     this.vamModalOpen.next(true);
   }
 
-  // Cerrar el modal VAM
+  // Close VAM modal
   closeVamModal(): void {
     this.vamModalOpen.next(false);
   }
 
-  // Obtener el estado actual del modal
+  // Get current modal state
   isVamModalOpen(): boolean {
     return this.vamModalOpen.value;
   }

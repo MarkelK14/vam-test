@@ -1,14 +1,14 @@
-<!-- Tabla de Zonas de Frecuencia Cardíaca -->
+<!-- Heart Rate Zones Table -->
 @if (vamData.hrMax) {
 <div class="bg-white rounded-lg shadow-lg p-6 max-w-4xl mx-auto my-12">
   
-  <!-- Título -->
+  <!-- Title -->
   <div class="text-center mb-6">
     <h2 class="text-3xl font-bold text-gray-800 mb-2">💓 Zonas de Frecuencia Cardíaca</h2>
     <p class="text-gray-600">Basadas en tu FC máx: {{ vamData.hrMax }} bpm</p>
   </div>
 
-  <!-- Tabla -->
+  <!-- Table -->
   <div class="overflow-x-auto">
     <table class="w-full border-collapse bg-white rounded-lg overflow-hidden shadow-sm">
       
@@ -33,7 +33,7 @@
       <!-- Body -->
       <tbody class="divide-y divide-gray-200">
         
-        <!-- Iterar sobre todas las zonas -->
+        <!-- Iterate over all zones -->
         @for (zone of zonesByHeartRate; track zone.zone) {
         <tr class="hover:bg-gray-50 transition-colors">
           <td class="px-4 py-4 whitespace-nowrap w-16">
@@ -59,7 +59,7 @@
     </table>
   </div>
 
-  <!-- Nota informativa -->
+<!-- Informative note -->
   <div class="mt-6 p-4 bg-red-50 rounded-lg border border-red-200">
     <div class="flex items-start">
       <div class="text-red-600 mr-3">💓</div>
@@ -73,7 +73,7 @@
 </div>
 }
 
-<!-- Mensaje cuando no hay datos -->
+<!-- Message when no data is available -->
 @if (!vamData.hrMax) {
 <div class="text-center py-12">
   <div class="text-gray-400 text-6xl mb-4">💓</div>

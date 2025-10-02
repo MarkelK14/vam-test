@@ -83,8 +83,8 @@ export class VamResultFormComponent {
   getPaceFromDistance(distance: number): { paceMin: number; paceSec: number } {
     const totalMinutes = 5;
 
-    const pace = distance / totalMinutes; // metros por minuto
-    const pacePerKm = 1000 / pace; // minutos por km
+    const pace = distance / totalMinutes; // meters per minute
+    const pacePerKm = 1000 / pace; // minutes per km
 
     const paceMin = Math.floor(pacePerKm);
     const paceSec = Math.round((pacePerKm - paceMin) * 60);
@@ -95,10 +95,10 @@ export class VamResultFormComponent {
   getDistanceFromPace(paceMin: number, paceSec: number): number {
     const totalMinutes = 5;
 
-    const pacePerKm = paceMin + paceSec / 60; // minutos por km
-    const pace = 1000 / pacePerKm; // metros por minuto
+    const pacePerKm = paceMin + paceSec / 60; // minutes per km
+    const pace = 1000 / pacePerKm; // meters per minute
 
-    const distance = pace * totalMinutes; // distancia en metros en 5 minutos
+    const distance = pace * totalMinutes; // distance in meters in 5 minutes
 
     return Math.round(distance);
   }
