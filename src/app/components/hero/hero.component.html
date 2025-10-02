@@ -1,0 +1,103 @@
+<section class="relative h-screen bg-gray-100 flex items-center justify-center px-4 sm:px-6 lg:px-8">
+  <div class="max-w-4xl mx-auto text-center text-gray-900">
+    <!-- Title -->
+    <div class="relative mb-6">
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold font-primary leading-tight">
+        Calcula tu <span class="text-primary">Test VAM</span> y obtén tus <span class="text-primary">zonas de entrenamiento</span> personalizadas
+      </h1>
+    </div>
+    
+    <!-- Subtitle -->
+    <p class="text-lg sm:text-xl lg:text-2xl font-secondary mb-8 text-gray-700 max-w-3xl mx-auto leading-relaxed">
+      Introduce tus datos del Test VAM y descubre tus <span class="text-primary font-semibold">zonas de ritmo</span> y <span class="text-primary font-semibold">zonas de frecuencia cardíaca</span> para optimizar tu running.
+    </p>
+
+    <!-- Modal toggle -->
+    <button data-modal-target="vam-info-modal" data-modal-toggle="vam-info-modal" class="mx-auto block items-center justify-center px-8 py-4 text-lg font-semibold text-gray-700 bg-white rounded-xl border-2 border-gray-200 hover:border-primary hover:text-primary transition-all duration-300 shadow-md hover:shadow-lg" type="button">
+    ¿Qué es el Test VAM?
+    </button>
+    
+  </div>
+  
+  <!-- CTA Bottom -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+    <a
+      href="#vam-result-form"
+      class="flex flex-col items-center text-gray-600 hover:text-primary transition-colors"
+    >
+      <span class="text-sm font-medium mb-2">Descubre tus zonas</span>
+      <i class="fas fa-chevron-down text-xl"></i>
+    </a>
+  </div>
+</section>
+
+
+<!-- Main modal -->
+<div id="vam-info-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-3xl max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-gray-100 rounded-lg shadow-lg">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between p-6 border-b border-gray-200">
+                <h3 class="text-2xl font-bold text-primary font-primary">
+                    ¿Qué es el Test VAM?
+                </h3>
+                <button type="button" class="text-gray-400 hover:text-primary rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center transition-colors" data-modal-hide="vam-info-modal">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                    <span class="sr-only">Cerrar modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-6 space-y-4 text-gray-700 text-base leading-relaxed">
+                <p>
+                    El Test de <span class="font-semibold text-primary">Velocidad Anaeróbica Máxima (VAM)</span> es una prueba que mide la velocidad máxima a la que tu cuerpo puede correr usando principalmente energía aeróbica, es decir, sin acumular demasiada fatiga por lactato.
+                    En palabras sencillas: te dice qué tan rápido puedes correr de manera eficiente durante un tiempo corto y muy intenso.
+                </p>
+
+                <h4 class="text-lg font-bold text-primary mt-4">¿Para qué sirve?</h4>
+                <p>El Test VAM sirve para:</p>
+                <ul class="list-disc list-inside ml-4 space-y-1">
+                    <li>Conocer tu nivel físico real en carrera.</li>
+                    <li>Calcular tus zonas de entrenamiento personalizadas: zonas de ritmo y de frecuencia cardíaca.</li>
+                    <li>Mejorar la eficiencia de tus entrenamientos, evitando entrenar demasiado lento o demasiado rápido.</li>
+                    <li>Planificar entrenamientos progresivos según tu capacidad real.</li>
+                </ul>
+
+                <h4 class="text-lg font-bold text-primary mt-4">¿Cómo se hace?</h4>
+                <ul class="list-disc list-inside ml-4 space-y-1">
+                    <li><span class="font-semibold">Calentamiento:</span> Corre suave 10–15 minutos para preparar tus músculos y corazón.</li>
+                    <li><span class="font-semibold">Test de 5 minutos:</span> Corre a la máxima velocidad que puedas mantener durante 5 minutos.</li>
+                    <li><span class="font-semibold">Medición:</span> Anota tu ritmo promedio durante los 5 minutos y tu frecuencia cardíaca máxima alcanzada.</li>
+                    <li><span class="font-semibold">Recuperación:</span> Corre suave 5–10 minutos para recuperar.</li>
+                    <li><span class="italic">Nota:</span> Se puede hacer en pista, cinta o ruta segura. Es importante que el terreno sea constante para que los resultados sean fiables.</li>
+                </ul>
+
+                <h4 class="text-lg font-bold text-primary mt-4">Resultados</h4>
+                <p>Al finalizar el test obtendrás:</p>
+                <ul class="list-disc list-inside ml-4 space-y-1">
+                    <li>Tu <span class="font-semibold">VAM</span>: velocidad máxima promedio en esos 5 minutos.</li>
+                    <li>Tu <span class="font-semibold">FCmáx</span>: frecuencia cardíaca máxima alcanzada.</li>
+                </ul>
+                <p>A partir de estos datos se pueden calcular:</p>
+                <ul class="list-disc list-inside ml-4 space-y-1">
+                    <li><span class="font-semibold">Zonas de ritmo:</span> cuánto esfuerzo debes aplicar en cada tipo de entrenamiento.</li>
+                    <li><span class="font-semibold">Zonas de frecuencia cardíaca:</span> intensidad basada en tu corazón.</li>
+                </ul>
+
+                <h4 class="text-lg font-bold text-primary mt-4">Conclusiones y cómo usar los resultados</h4>
+                <ul class="list-disc list-inside ml-4 space-y-1">
+                    <li>Entrenar en la zona correcta, ni demasiado fácil ni demasiado duro.</li>
+                    <li>Mejorar tu resistencia y velocidad de forma eficiente.</li>
+                    <li>Planificar entrenamientos por tipo de esfuerzo: regenerativo, fondo, umbral o intensidad máxima.</li>
+                    <li>Evitar sobreentrenamiento y lesiones al entrenar con datos reales de tu cuerpo.</li>
+                </ul>
+            </div>
+            <!-- Modal footer -->
+            <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600 justify-end space-x-2">
+                <button data-modal-hide="vam-info-modal" type="button" class="text-white bg-primary hover:orange-600 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

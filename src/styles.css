@@ -1,0 +1,33 @@
+@import "tailwindcss";
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+@source "../node_modules/flowbite";
+
+
+/* Global styles configuration (Tailwind v4) */
+@theme {
+  --font-primary: "Inter", sans-serif;
+  --font-secondary: "Poppins", sans-serif;
+
+  --color-primary: #f05a1a;
+  --color-secondary: #db5015;
+  --color-background: #f3f4f6;
+  --color-background-dark: #18181b;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Fix Flowbite bug with duplicated drawer backdrop on mobile devices */
+@media (max-width: 640px) {
+  [drawer-backdrop]:not(:first-of-type) {
+    display: none !important;
+  }
+
+  .fc .fc-toolbar {
+    align-items: center;
+    display: flow;
+    justify-content: space-between;
+  }
+}
