@@ -9,7 +9,7 @@
         </p>
     </div>
 
-    <form class="bg-white p-8 rounded-xl shadow-lg border border-gray-100" (ngSubmit)="onSubmit($event)">
+    <form [formGroup]="vamForm" (ngSubmit)="getDataFromForm()"  class="bg-white p-8 rounded-xl shadow-lg border border-gray-100">
         <!-- Campo VAM -->
         <div class="mb-6">
             <label class="block text-gray-700 font-semibold mb-3 font-primary">
@@ -39,78 +39,85 @@
                 </div>
             </div>
 
-            <!-- Modo Ritmo -->
-            <div *ngIf="isPaceMode">
-                <p class="text-sm text-gray-600 mb-4">
-                    Introduce el ritmo (pace) por kilómetro que mantuviste durante tu test VAM
-                </p>
-                <div class="flex items-center space-x-3">
-                    <div class="flex-1">
-                        <label for="pace-minutes" class="block text-xs text-gray-500 mb-1">Minutos</label>
-                        <input 
-                            type="number" 
-                            id="pace-minutes" 
-                            name="pace-minutes" 
-                            min="2" 
-                            max="15" 
-                            placeholder="4"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
-                        >
+            <!-- Pace Mode -->
+            @if (isPaceMode){
+                <div>
+                    <p class="text-sm text-gray-600 mb-4">
+                        Introduce el ritmo (pace) por kilómetro que mantuviste durante tu test VAM
+                    </p>
+                    <div class="flex items-center space-x-3">
+                        <div class="flex-1">
+                            <label for="paceMin" class="block text-xs text-gray-500 mb-1">Minutos</label>
+                            <input 
+                                type="number" 
+                                id="paceMin" 
+                                name="paceMin"
+                                formControlName="paceMin"
+                                min="2" 
+                                max="15" 
+                                placeholder="4"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
+                            >
+                        </div>
+                        <div class="flex-1">
+                            <label for="paceSec" class="block text-xs text-gray-500 mb-1">Segundos</label>
+                            <input 
+                                type="number" 
+                                id="paceSec" 
+                                name="paceSec" 
+                                formControlName="paceSec"
+                                min="0" 
+                                max="59" 
+                                step="1"
+                                placeholder="30"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
+                            >
+                        </div>
+                        <div class="flex items-end text-gray-500 font-medium mt-6">
+                            <span class="text-lg">min/km</span>
+                        </div>
                     </div>
-                    <div class="flex-1">
-                        <label for="pace-seconds" class="block text-xs text-gray-500 mb-1">Segundos</label>
-                        <input 
-                            type="number" 
-                            id="pace-seconds" 
-                            name="pace-seconds" 
-                            min="0" 
-                            max="59" 
-                            step="1"
-                            placeholder="30"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
-                        >
-                    </div>
-                    <div class="flex items-end text-gray-500 font-medium mt-6">
-                        <span class="text-lg">min/km</span>
+                    <div class="mt-2 text-xs text-gray-500">
+                        Ejemplo: Si tu ritmo fue de 4 minutos y 30 segundos por kilómetro → 4:30 min/km
                     </div>
                 </div>
-                <div class="mt-2 text-xs text-gray-500">
-                    Ejemplo: Si tu ritmo fue de 4 minutos y 30 segundos por kilómetro → 4:30 min/km
-                </div>
-            </div>
+            }
 
-            <!-- Modo Distancia -->
-            <div *ngIf="!isPaceMode">
-                <p class="text-sm text-gray-600 mb-4">
-                    Introduce la distancia recorrida en tu test VAM de 5 minutos
-                </p>
-                <div class="flex items-center space-x-3">
-                    <div class="flex-1">
-                        <label for="distance-meters" class="block text-xs text-gray-500 mb-1">Distancia</label>
-                        <input 
-                            type="number" 
-                            id="distance-meters" 
-                            name="distance-meters" 
-                            min="500" 
-                            max="3000" 
-                            step="10"
-                            placeholder="1200"
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
-                        >
+            <!-- Distance Mode -->
+             @if (!isPaceMode){
+                <div>
+                    <p class="text-sm text-gray-600 mb-4">
+                        Introduce la distancia recorrida en tu test VAM de 5 minutos
+                    </p>
+                    <div class="flex items-center space-x-3">
+                        <div class="flex-1">
+                            <label for="distance" class="block text-xs text-gray-500 mb-1">Distancia</label>
+                            <input 
+                                type="number" 
+                                id="distance" 
+                                name="distance" 
+                                formControlName="distance"
+                                min="500" 
+                                max="3000" 
+                                step="10"
+                                placeholder="1200"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-colors"
+                            >
+                        </div>
+                        <div class="flex items-end text-gray-500 font-medium mt-6">
+                            <span class="text-lg">metros</span>
+                        </div>
                     </div>
-                    <div class="flex items-end text-gray-500 font-medium mt-6">
-                        <span class="text-lg">metros</span>
+                    <div class="mt-2 text-xs text-gray-500">
+                        Ejemplo: Si recorriste 1200 metros en 5 minutos → tu ritmo VAM se calculará automáticamente
                     </div>
                 </div>
-                <div class="mt-2 text-xs text-gray-500">
-                    Ejemplo: Si recorriste 1200 metros en 5 minutos → tu ritmo VAM se calculará automáticamente
-                </div>
-            </div>
+            }
         </div>
 
-        <!-- Campo FCmax -->
+        <!-- HRmax Field -->
         <div class="mb-8">
-            <label for="fcmax" class="block text-gray-700 font-semibold mb-3 font-primary">
+            <label for="hrMax" class="block text-gray-700 font-semibold mb-3 font-primary">
                 Frecuencia Cardíaca Máxima <span class="text-primary">*</span>
             </label>
             <p class="text-sm text-gray-600 mb-4">
@@ -119,8 +126,9 @@
             <div class="relative">
                 <input 
                     type="number" 
-                    id="fcmax" 
-                    name="fcmax" 
+                    id="hrMax" 
+                    name="hrMax" 
+                    formControlName="hrMax"
                     min="100" 
                     max="220" 
                     placeholder="190"
@@ -139,6 +147,7 @@
             <button 
                 type="submit" 
                 class="flex-1 bg-primary text-white font-bold py-4 px-6 rounded-lg hover:bg-secondary transition-all duration-300 transform hover:scale-[1.02] shadow-md hover:shadow-lg font-primary"
+                (click)="getDataFromForm()"
             >
                 🎯 Calcular Zonas
             </button>
@@ -151,14 +160,6 @@
             >
                 📄 Descargar Resultados
             </button>
-        </div>
-
-        <!-- Estado actual (para debugging - puede eliminarse en producción) -->
-        <div class="mt-4 p-3 bg-primary/10 rounded-lg border border-primary">
-            <p class="text-xs text-primary">
-                <strong>Modo actual:</strong> {{ getSelectedMode() | uppercase }} 
-                <span class="ml-2">({{ isPaceMode ? 'Por Ritmo' : 'Por Distancia' }})</span>
-            </p>
         </div>
 
         <!-- Información adicional -->

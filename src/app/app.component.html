@@ -1,6 +1,13 @@
 
 <app-hero></app-hero>
 
-<app-vam-result-form></app-vam-result-form>
+Pace Min: {{ vamData.paceMin }}<br>
+Pace Sec: {{ vamData.paceSec }}<br>
+HR Max: {{ vamData.hrMax }}
+
+<app-vam-result-form (emittedVamData)="getVamData($event)"></app-vam-result-form>
 
 <app-vam-info-modal></app-vam-info-modal>
+
+
+<ngx-sonner-toaster richColors position="bottom-right" [expand]="true" />
