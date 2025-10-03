@@ -1,56 +1,69 @@
 # 🏃‍♂️ VAM Test Calculator
 
-A modern Angular application for calculating personalized running training zones based on VAM (Maximum Aerobic Velocity) test results.
+A comprehensive Angular application for calculating personalized running training zones based on VAM (Maximum Aerobic Velocity) test results. Generate both pace and heart rate zones with professional accuracy.
 
 ![Angular](https://img.shields.io/badge/Angular-19.1.5-red?logo=angular)
 ![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.1.14-blue?logo=tailwindcss)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.7.2-blue?logo=typescript)
+![NgxSonner](https://img.shields.io/badge/NgxSonner-Latest-green?logo=angular)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 ## 📋 About
 
-The VAM Test Calculator helps runners determine their optimal training zones by analyzing their Maximum Aerobic Velocity test results. The application provides:
+The VAM Test Calculator is a professional-grade tool that helps runners and coaches determine optimal training zones through scientific VAM (Maximum Aerobic Velocity) analysis. Built with modern web technologies, it provides accurate, personalized training recommendations.
 
-- **Personalized Training Zones**: Calculate pace and heart rate zones based on your VAM test
-- **Dual Input Methods**: Enter your data by pace or distance covered
-- **Educational Content**: Learn about VAM testing with integrated modal information
-- **Responsive Design**: Optimized for both desktop and mobile devices
-- **Modern UI**: Clean, intuitive interface built with Tailwind CSS
+**Key Benefits:**
+- **Dual Zone Calculation**: Generate both pace zones (R0-R6) and heart rate zones (Z1-Z5)
+- **Scientific Accuracy**: Based on established sports science protocols
+- **Flexible Input**: Support for both pace and distance measurement methods
+- **Educational Resources**: Comprehensive VAM testing guide and methodology
+- **Professional Results**: Export-ready training zone tables
+- **Cross-Platform**: Works seamlessly on desktop, tablet, and mobile devices
 
 ## ✨ Features
 
-### 🎯 Core Functionality
-- **VAM Data Input**: Two modes for entering test results
-  - By Pace: Enter your rhythm per kilometer (min/km)
-  - By Distance: Enter distance covered in 5 minutes
-- **Heart Rate Integration**: Input maximum heart rate from your test
-- **Training Zone Calculation**: Generate personalized training zones
-- **Results Export**: Download your calculated zones (coming soon)
+### 🎯 Training Zone Calculation
+- **Pace Zones (R0-R6)**: Complete running pace zones based on VAM percentages
+  - R0: Recovery (< 65% VAM)
+  - R1: Aerobic Base (65-75% VAM)  
+  - R2: Aerobic Threshold (75-85% VAM)
+  - R3: Anaerobic Threshold (90-95% VAM)
+  - R3+: VAM Intensity (100% VAM)
+  - R4: Anaerobic Capacity (105-120% VAM)
+  - R5: Anaerobic Power (120-140% VAM)
+  - R6: Alactic Power (>150% VAM)
+
+- **Heart Rate Zones (Z1-Z5)**: Scientifically accurate HR zones
+  - Z1: Recovery (< 70% HR max)
+  - Z2: Endurance (70-80% HR max)
+  - Z3: Tempo (80-87% HR max)  
+  - Z4: Threshold (87-92% HR max)
+  - Z5: VO₂max (92-100% HR max)
+
+### 📊 Data Input Methods
+- **By Pace**: Enter min/km rhythm from your VAM test
+- **By Distance**: Enter meters covered in 5-minute test
+- **HR Integration**: Maximum heart rate from test session
+- **Automatic Conversion**: Seamless switching between input methods
 
 ### 🎨 User Experience
-- **Interactive Hero Section**: Eye-catching landing with call-to-action
-- **Educational Modal**: Complete guide on what VAM testing is and how to perform it
-- **Form Validation**: Input validation with helpful user feedback
-- **Responsive Design**: Mobile-first approach with smooth animations
-- **Accessibility**: WCAG compliant with keyboard navigation support
+- **Modern Interface**: Clean, professional design with intuitive navigation
+- **Educational Content**: Built-in VAM testing guide and methodology
+- **Real-time Validation**: Instant feedback and error prevention
+- **Responsive Layout**: Optimized for all device types and screen sizes
+- **Toast Notifications**: User-friendly success and error messages
+- **Progressive Enhancement**: Works without JavaScript fallback
 
-### 🛠️ Technical Features
-- **Angular 19**: Latest Angular framework with standalone components
-- **Tailwind CSS 4**: Modern utility-first CSS framework
-- **TypeScript**: Full type safety and modern JavaScript features
-- **Component Architecture**: Modular, reusable component structure
-- **Service Communication**: Reactive state management between components
-
-## 🚀 Quick Start
+## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js 18+ 
-- npm or yarn
-- Angular CLI 19+
+- **Node.js** 18.13+ (LTS recommended)
+- **npm** 9+ or **yarn** 1.22+
+- **Angular CLI** 19+ (`npm install -g @angular/cli`)
 
 ### Installation
 
-1. **Clone the repository**
+1. **Clone and navigate**
    ```bash
    git clone https://github.com/MarkelK14/vam-test.git
    cd vam-test
@@ -59,92 +72,55 @@ The VAM Test Calculator helps runners determine their optimal training zones by 
 2. **Install dependencies**
    ```bash
    npm install
+   # or
+   yarn install
    ```
 
 3. **Start development server**
    ```bash
+   npm start
+   # or
    ng serve
    ```
 
-4. **Open your browser**
+4. **Open application**
    Navigate to `http://localhost:4200/`
 
-## 🏗️ Project Structure
+## 🏗️ Project Architecture
 
 ```
 src/
 ├── app/
 │   ├── components/
-│   │   ├── hero/                 # Landing hero section
-│   │   ├── vam-result-form/      # Main calculation form
-│   │   └── vam-info-modal/       # Educational modal
+│   │   ├── hero/                    # Landing section with CTA
+│   │   ├── vam-result-form/         # Dual-mode input form
+│   │   ├── pace-zones/              # R0-R6 pace training zones
+│   │   ├── heart-rate-zones/        # Z1-Z5 heart rate zones
+│   │   └── vam-info-modal/          # Educational VAM guide
+│   ├── interfaces/
+│   │   ├── ivam-data.interface.ts   # VAM test data structure
+│   │   ├── ipace-zones.interface.ts # Pace zone definitions
+│   │   └── iheart-rate-zones.interface.ts # HR zone definitions
 │   ├── services/
-│   │   └── modal.service.ts      # Modal state management
-│   ├── app.component.*           # Root component
-│   └── app.config.ts             # App configuration
-├── styles.css                    # Global styles & Tailwind config
-└── index.html                    # HTML entry point
+│   │   └── modal.service.ts         # Reactive modal management
+│   ├── app.component.*              # Root component with data flow
+│   └── app.config.ts                # Application configuration
+├── styles.css                       # Global styles & font imports
+├── index.html                       # Main HTML template
+└── public/                          # Static assets
+    ├── favicon.ico
+    └── og-image.webp               # Social media preview
 ```
 
-## 🏃‍♂️ VAM Testing Guide
+## 🏃‍♂️ What is VAM?
 
-### What is VAM?
-```
-
-## �‍♂️ VAM Testing Guide
-
-### Available Scripts
-
-```bash
-# Development server
-npm run start
-
-# Build for production
-npm run build
-
-# Run tests
-npm run test
-
-# Lint code
-npm run lint
-
-# Generate new component
-ng generate component component-name
-```
-
-### Code Style
-- ESLint configuration for consistent code style
-- Prettier for code formatting
-- Angular style guide compliance
-- TypeScript strict mode enabled
-
-## 🏃‍♂️ VAM Testing Guide
-
-### What is VAM?
-VAM (Maximum Aerobic Velocity) is the minimum speed at which your body reaches maximum oxygen uptake (VO2 max). It's a key metric for determining training intensities.
-
-### How to Perform the Test
-1. **Warm-up**: 10-15 minutes easy running
-2. **Test**: Run at maximum sustainable pace for 5 minutes
-3. **Measurement**: Record your average pace and maximum heart rate
-4. **Cool-down**: 5-10 minutes easy recovery
-
-### Using the Calculator
-- Choose input method (pace or distance)
-- Enter your test results
-- Add your maximum heart rate
-- Generate your personalized training zones
+### Understanding VAM
+**VAM (Maximum Aerobic Velocity)** represents the minimum running speed at which your body reaches maximum oxygen consumption (VO₂max). It serves as the cornerstone for scientific training zone calculation and periodization planning.
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+Contributions are welcome! This project follows standard open-source contribution practices:
 
 ## 📄 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for full details.
