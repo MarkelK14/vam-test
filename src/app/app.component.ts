@@ -7,10 +7,11 @@ import { IVamData } from './interfaces/ivam-data.Interface';
 import { toast, NgxSonnerToaster } from 'ngx-sonner';
 import { PaceZonesComponent } from './components/pace-zones/pace-zones.component';
 import { HeartRateZonesComponent } from './components/heart-rate-zones/heart-rate-zones.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @Component({
   selector: 'app-root',
-  imports: [HeroComponent, VamResultFormComponent, PaceZonesComponent, HeartRateZonesComponent, VamInfoModalComponent, NgxSonnerToaster],
+  imports: [HeroComponent, VamResultFormComponent, PaceZonesComponent, HeartRateZonesComponent, VamInfoModalComponent, FooterComponent, NgxSonnerToaster],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   
