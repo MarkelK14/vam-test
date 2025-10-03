@@ -5,7 +5,7 @@
   <!-- Title -->
   <div class="text-center mb-6">
     <h2 class="text-3xl font-bold text-gray-800 mb-2">💓 Zonas de Frecuencia Cardíaca</h2>
-    <p class="text-gray-600">Basadas en tu FC máx: {{ vamData.hrMax }} bpm</p>
+    <p class="text-gray-600">Basadas en tu FC máx: {{ vamData.hrMax }} ppm</p>
   </div>
 
   <!-- Table -->
@@ -25,7 +25,7 @@
             % FC máx
           </th>
           <th class="px-8 py-4 text-center text-xs font-medium text-gray-500 uppercase tracking-wider border-b w-40">
-            Frecuencia (bpm)
+            Frecuencia (ppm)
           </th>
         </tr>
       </thead>
@@ -50,7 +50,7 @@
           </td>
           <td class="px-8 py-4 text-sm text-gray-900 font-mono whitespace-nowrap w-32 text-center">{{ getPercentageRange(zone) }}</td>
           <td class="px-8 py-4 text-sm text-gray-900 font-mono whitespace-nowrap w-40 text-center">
-            {{ getHeartRateRange(zone) }} bpm
+            {{ getHeartRateRange(zone) }} ppm
           </td>
         </tr>
         }
