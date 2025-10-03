@@ -1,13 +1,11 @@
 @import "tailwindcss";
 @import "flowbite/src/themes/default";
-@plugin "flowbite/plugin";
-@source "../node_modules/flowbite";
 
 
 /* Global styles configuration (Tailwind v4) */
 @theme {
-  --font-primary: "Onest Variable", sans-serif;
-  --font-secondary: "Inter", sans-serif;
+  --font-primary: sans-serif;
+  --font-secondary: sans-serif;
 
   --color-primary: #f05a1a;
   --color-secondary: #db5015;
